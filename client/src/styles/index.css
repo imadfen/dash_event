@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'RubikDoodleShadow';
+  src: url('/fonts/RubikDoodleShadow-Regular.woff') format('woff');
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --accent-color: #f1c40f;
+  --background-color: #ecf0f1;
+  --text-color: #34495e;
+  --error-color: #e74c3c;
+  --success-color: #27ae60;
+  --warning-color: #f39c12;
+
+  font-family: 'Ubuntu', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: var(--text-color);
+  background-color: var(--background-color);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+  cursor: pointer;
+}
+a:hover {
+  color: #535bf2;
+}
+
+.primary-button,
+.secondary-button {
+  border-radius: 10px;
+  border: 2px solid var(--primary-color);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.primary-button{
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.secondary-button{
+  background-color: transparent;
+  color: var(--primary-color);
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+  transition: transform 0.25s;
+  transform: scale(105%);
+}
+
+.primary-button:active,
+.secondary-button:active {
+  transition: transform 0.1s;
+  transform: scale(95%);
+}
+
+.rubik-font{
+  font-family: 'RubikDoodleShadow', sans-serif;
+}
+
+body {
+  overflow-y: hidden;
+  margin: 0;
+  padding: 0;
+}
