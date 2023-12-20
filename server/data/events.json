@@ -5,7 +5,7 @@
         "description": "The Welcome Day of GDG Algiers is a chance for new members to know more about our activities and events",
         "date": "Tuesday, November 14, 2023",
         "time": "12:00 AM - 4:00 PM GMT+1",
-        "location": "Ecole Nationale Supérieure d'Informatique (Ex. INI), Algiers, Algeria",
+        "location": "Ecole Nationale Superieure d'Informatique (Ex. INI), Algiers, Algeria",
         "image": "https://res.cloudinary.com/startup-grind/image/fetch/c_fill,w_500,h_500,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/https://res.cloudinary.com/startup-grind/image/upload/c_fill%2Cdpr_2.0%2Cf_auto%2Cg_center%2Cq_auto:good/v1/gcs/platform-data-goog/event_banners/gdev-eccosystems-bevy-chapters-thumbnail_x4z1EBy.png"
     },
     {
@@ -23,7 +23,7 @@
         "description": "GDG School is coming with a new format that can adapt to the members that can't attend, with bootcamps with different fields, projects and challenges.",
         "date": "December 8 - 9, 2023",
         "time": "9:00 AM - 6:00 PM GMT+1",
-        "location": "Ecole Nationale Supérieure d'Informatique (Ex. INI), Algiers, Algeria",
+        "location": "Ecole Nationale Superieure d'Informatique (Ex. INI), Algiers, Algeria",
         "image": "https://res.cloudinary.com/startup-grind/image/fetch/c_fill,w_500,h_500,g_center/c_fill,dpr_2.0,f_auto,g_center,q_auto:good/https://res.cloudinary.com/startup-grind/image/upload/c_fill%2Cdpr_2.0%2Cf_auto%2Cg_center%2Cq_auto:good/v1/gcs/platform-data-goog/event_banners/gdev-eccosystems-bevy-chapters-thumbnail_x4z1EBy.png"
     }
 ]
