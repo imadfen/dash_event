@@ -54,13 +54,6 @@ const router = createBrowserRouter(
             }
           }}
         />
-        <Route
-          path="logout"
-          loader={() => {
-            logoutUser();
-            return redirect("/admin/login");
-          }}
-        />
       </Route>
     </Route>
   )
