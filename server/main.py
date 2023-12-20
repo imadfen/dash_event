@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 import os
 from fakeData import example_participants
 import threading
+import json
+
 
 load_dotenv()
 sender_adress = os.getenv("SENDER_ADDRESS")
@@ -60,6 +62,43 @@ def validate_token():
         return "", 401
 
 
+############################### handle data fetch request ################################
+
+@app.route("/events", methods=["GET"])
+def send_events():
+    try:
+        with open('./data/events.json', 'r') as file:
+            data = json.load(file)
+
+        return jsonify(data)
+    except FileNotFoundError:
+        return jsonify({'error': 'File not found'}), 404
+    except Exception: 
+        return jsonify({'error': 'Unexpected error'}), 400
+    
+@app.route("/participants", methods=["GET"])
+def send_participants():
+    authorization_header = request.headers.get('Authorization')
+
+    if not authorization_header or not authorization_header.startswith('Bearer '):
+        return jsonify({'message': 'Unauthorized'}), 401
+    
+    _, token = authorization_header.split(' ', 1)
+    
+    if not isTokenValid(token):
+        return jsonify({'message': 'Unauthorized'}), 401
+
+    try:
+        with open('./data/participants.json', 'r') as file:
+            data = json.load(file)
+
+        return jsonify(data)
+    except FileNotFoundError:
+        return jsonify({'error': 'File not found'}), 404
+    except Exception: 
+        return jsonify({'error': 'Unexpected error'}), 400
+
+
 ############################### handle send emails request ################################
 ############ check validity of data ############
 def validate_json(json_data):
@@ -94,6 +133,16 @@ def filter_participants(data, event_id):
 ############ send emails route ############
 @app.route("/send_emails", methods=["POST"])
 def receive_json():
+    authorization_header = request.headers.get('Authorization')
+
+    if not authorization_header or not authorization_header.startswith('Bearer '):
+        return jsonify({'message': 'Unauthorized'}), 401
+    
+    _, token = authorization_header.split(' ', 1)
+    
+    if not isTokenValid(token):
+        return jsonify({'message': 'Unauthorized'}), 401
+
     received_data = request.get_json()
 
     if not validate_json(received_data):

@@ -7,12 +7,16 @@ import { Event } from "../types/Event";
 import { Participant } from "../types/Pariticipant";
 
 type PropsType = {
-    selectedEvent: Event;
+    selectedEvent: Event | null;
     participants: Participant[];
 }
 
 export default function DashboardSection({selectedEvent, participants}: PropsType) {
   const [activeTab, setActiveTab] = useState("Event");
+
+  if (!selectedEvent) {
+    return null
+  }
 
   return (
     <div className="flex-grow min-h-full flex flex-col items-center bg-white">

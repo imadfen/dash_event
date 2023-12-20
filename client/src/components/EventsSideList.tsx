@@ -3,7 +3,7 @@ import { Event } from "../types/Event";
 
 type PropsType = {
   events: Event[];
-  selectedEvent: Event;
+  selectedEvent: Event | null;
   selectEvent: (event: Event) => void;
 };
 
@@ -18,7 +18,7 @@ export default function EventsSideList({ events, selectedEvent, selectEvent }: P
         {events.map((event) => (
           <div
             key={event.id}
-            className={`flex items-center mb-3 rounded-lg p-2 duration-100 cursor-pointer ${selectedEvent.id === event.id ? "bg-gray-300" : "hover:bg-gray-200"}`}
+            className={`flex items-center mb-3 rounded-lg p-2 duration-100 cursor-pointer ${selectedEvent && selectedEvent.id === event.id ? "bg-gray-300" : "hover:bg-gray-200"}`}
             onClick={() => selectEvent(event)}
           >
             <img
