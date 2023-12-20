@@ -54,7 +54,7 @@ export default function AdminEmailTab({ selectedEvent }: PropsType) {
   return (
     <div>
       {loading ? (
-        <div className="bg-white bg-opacity-50 w-screen h-full z-50 absolute top-0 left-0"></div>
+        <div className="bg-white bg-opacity-50 w-screen h-full z-50 fixed top-0 left-0"></div>
       ) : (
         <div className="mx-auto w-[90%] flex">
           <EmailEntry value={html} setValue={setHtml} />

@@ -1,12 +1,12 @@
 import { Event } from "../types/Event";
-import { RegistarionData } from "../types/RegistarionData";
+import { RegistrationData } from "../types/RegistarionData";
 import RegisterForm from "./RegisterForm";
 import { Icon } from "@iconify/react";
 import dash from "../assets/dash.png";
 
 type PropsType = {
   event: Event;
-  onSubmit: (data: RegistarionData) => void;
+  onSubmit: (data: RegistrationData) => void;
   unselectEvent: () => void;
 };
 

@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
-import { RegistarionData } from "../types/RegistarionData";
+import { RegistrationData } from "../types/RegistarionData";
 
 type PropsType = {
-  onSubmit: (data: RegistarionData) => void;
+  onSubmit: (data: RegistrationData) => void;
 };
 
 export default function RegisterForm({ onSubmit }: PropsType) {
@@ -11,7 +11,7 @@ export default function RegisterForm({ onSubmit }: PropsType) {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm<RegistarionData>();
+  } = useForm<RegistrationData>();
   const isStudent = watch("isStudent");
 
   return (

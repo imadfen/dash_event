@@ -1,13 +1,12 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
-import jwt
-import datetime
-from emailSender import send_for_each
-from dotenv import load_dotenv
 import os
-from fakeData import example_participants
+import jwt
 import threading
-import json
+from dotenv import load_dotenv
+from emailSender import send_for_each
+from dataManagement import get_events, get_participants, validate_registration_data, add_participant
+import datetime
 
 
 load_dotenv()
@@ -39,7 +38,7 @@ def get_token():
         return jsonify({"error": "Invalid username or password"}), 401
 
 
-################# check if tocken valid ######################
+################# check if token valid ######################
 def isTokenValid(token: str):
     if not token:
         return False
@@ -47,7 +46,8 @@ def isTokenValid(token: str):
     try:
         jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])
         return True
-    except Exception:
+    except Exception as e:
+        print(e)
         return False
 
 
@@ -63,17 +63,17 @@ def validate_token():
 
 
 ############################### handle data fetch request ################################
-
 @app.route("/events", methods=["GET"])
 def send_events():
     try:
-        with open('./data/events.json', 'r') as file:
-            data = json.load(file)
+        data = get_events()
 
         return jsonify(data)
-    except FileNotFoundError:
+    except FileNotFoundError as e:
+        print(e)
         return jsonify({'error': 'File not found'}), 404
-    except Exception: 
+    except Exception as e:
+        print(e)
         return jsonify({'error': 'Unexpected error'}), 400
     
 @app.route("/participants", methods=["GET"])
@@ -89,26 +89,44 @@ def send_participants():
         return jsonify({'message': 'Unauthorized'}), 401
 
     try:
-        with open('./data/participants.json', 'r') as file:
-            data = json.load(file)
+        data = get_participants()
 
         return jsonify(data)
-    except FileNotFoundError:
+    except FileNotFoundError as e:
+        print(e)
         return jsonify({'error': 'File not found'}), 404
-    except Exception: 
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Unexpected error'}), 400
+
+
+############################### handle registration request ################################
+@app.route("/register", methods=["POST"])
+def register():
+    received_data = request.get_json()
+
+    if not validate_registration_data(received_data):
+        return jsonify({"error": "Invalid JSON format or data types."}), 400
+    
+    try:
+        add_participant(received_data)
+
+        return "", 200
+    except Exception as e:
+        print(e)
         return jsonify({'error': 'Unexpected error'}), 400
 
 
 ############################### handle send emails request ################################
 ############ check validity of data ############
-def validate_json(json_data):
-    if all(key in json_data for key in ("eventId", "body", "options")):
-        if not isinstance(json_data["eventId"], int) or not isinstance(
-            json_data["body"], str
+def validate_email_data(data):
+    if all(key in data for key in ("eventId", "body", "options")):
+        if not isinstance(data["eventId"], int) or not isinstance(
+            data["body"], str
         ):
             return False
 
-        options = json_data["options"]
+        options = data["options"]
         if all(
             key in options
             for key in ("subject", "salutation", "useReceiverName", "signature")
@@ -145,7 +163,7 @@ def receive_json():
 
     received_data = request.get_json()
 
-    if not validate_json(received_data):
+    if not validate_email_data(received_data):
         return jsonify({"error": "Invalid JSON format or data types."}), 400
 
     eventId: int = received_data["eventId"]

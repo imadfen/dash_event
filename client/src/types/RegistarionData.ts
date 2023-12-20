@@ -1,4 +1,4 @@
-export type RegistarionData = {
+export type RegistrationData = {
     firstName: string;
     lastName: string;
     email: string;
@@ -6,3 +6,5 @@ export type RegistarionData = {
     isStudent: boolean;
     university?: string;
 }
+
+export type RegistrationToEventData = RegistrationData & {eventId: number}

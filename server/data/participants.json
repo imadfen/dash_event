@@ -170,5 +170,13 @@
         "isStudent": true,
         "university": "PQR College",
         "eventId": 1
+    },
+    {
+        "eventId": 1,
+        "firstName": "Mohamed Imad",
+        "lastName": "Fenniche",
+        "email": "imadfen20@gmail.com",
+        "phone": "0560018747",
+        "isStudent": false
     }
 ]

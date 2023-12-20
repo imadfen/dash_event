@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import EventsSection from "../components/EventsSection";
-import { RegistarionData } from "../types/RegistarionData";
+import { RegistrationData } from "../types/RegistarionData";
 import { Event } from "../types/Event";
 import RegisterSection from "../components/RegisterSection";
 import RegisterSuccessScreen from "../components/RegisterSuccessScreen";
 import fetchEvents from "../utils/fetchEvents";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import handleRegistration from "../utils/handleRegistration";
+import RegisterFailScreen from "../components/RegisterFailScreen";
 
 export default function Home() {
   const [events, setEvents] = useState<Event[]>([]);
@@ -13,6 +15,8 @@ export default function Home() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [loadingEvents, setLoadingEvents] = useState(true);
   const [errorLoadingEvents, setErrorLoadingEvents] = useState(false);
+  const [loadingRegistration, setLoadingRegistration] = useState(false);
+  const [errorRegister, setErrorRegister] = useState(false);
 
   useEffect(() => {
     fetchEvents().then((response) => {
@@ -22,11 +26,22 @@ export default function Home() {
     });
   }, []);
 
-  const handleSubmit = (data: RegistarionData) => {
-    // I should send it to server but there is a lack of time 😅
+  const handleSubmit = async (data: RegistrationData) => {
+    if (!selectedEvent) return false;
+
+    setLoadingRegistration(true);
+
+    const registerToEventData = { eventId: selectedEvent.id, ...data };
+    const result = await handleRegistration(registerToEventData);
+
+    if (result) {
+      setIsSubmitted(true);
+    } else {
+      setErrorRegister(true);
+    }
 
     setSelectedEvent(null);
-    setIsSubmitted(true);
+    setLoadingRegistration(false);
   };
 
   const unselectEvent = () => {
@@ -35,8 +50,15 @@ export default function Home() {
 
   return (
     <div className="min-h-full">
+      {loadingRegistration && (
+        <div className="bg-white bg-opacity-50 w-screen h-full z-50 fixed top-0 left-0"></div>
+      )}
       {errorLoadingEvents ? (
-        <h1 className="text-2xl font-bold text-error text-center">Error while fetching data</h1>
+        <h1 className="text-2xl font-bold text-error text-center">
+          Error while fetching data
+        </h1>
+      ) : errorRegister ? (
+        <RegisterFailScreen goHome={() => setErrorRegister(false)} />
       ) : isSubmitted ? (
         <RegisterSuccessScreen goHome={() => setIsSubmitted(false)} />
       ) : selectedEvent ? (

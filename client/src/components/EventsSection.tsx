@@ -16,8 +16,8 @@ export default function EventsSection({ events, handleSelect }: PropsType) {
         </h1>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 place-items-center gap-10">
-          {events.map((event) => (
-            <div className="w-full h-full flex place-content-center">
+          {events.map((event, i) => (
+            <div key={i} className="w-full h-full flex place-content-center">
               <div
                 className="w-full cursor-pointer hover:scale-105 duration-300"
                 onClick={() => handleSelect(event)}
