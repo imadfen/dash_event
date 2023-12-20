@@ -3,23 +3,23 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'RubikDoodleShadow';
-  src: url('/fonts/RubikDoodleShadow-Regular.woff') format('woff');
+  font-family: "RubikDoodleShadow";
+  src: url("/fonts/RubikDoodleShadow-Regular.woff") format("woff");
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap");
 
 :root {
   --primary-color: #3498db;
   --secondary-color: #2ecc71;
   --accent-color: #f1c40f;
   --background-color: #ecf0f1;
-  --text-color: #34495e;
+  --text-color: #151d47;
   --error-color: #e74c3c;
   --success-color: #27ae60;
   --warning-color: #f39c12;
 
-  font-family: 'Ubuntu', sans-serif;
+  font-family: "Ubuntu", sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -53,12 +53,12 @@ a:hover {
   cursor: pointer;
 }
 
-.primary-button{
+.primary-button {
   background-color: var(--primary-color);
   color: white;
 }
 
-.secondary-button{
+.secondary-button {
   background-color: transparent;
   color: var(--primary-color);
 }
@@ -75,12 +75,22 @@ a:hover {
   transform: scale(95%);
 }
 
-.rubik-font{
-  font-family: 'RubikDoodleShadow', sans-serif;
+.rubik-font {
+  font-family: "RubikDoodleShadow", sans-serif;
+}
+
+.navbar-bg {
+  background: rgb(185, 249, 255);
+  background: linear-gradient(
+    35deg,
+    rgba(185, 249, 255, 1) 0%,
+    rgba(38, 224, 255, 1) 55%,
+    rgba(89, 119, 223, 1) 100%
+  );
 }
 
 body {
-  overflow-y: hidden;
+  overflow-x: hidden;
   margin: 0;
   padding: 0;
 }
