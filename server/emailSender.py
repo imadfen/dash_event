@@ -1,11 +1,7 @@
-import os
-from typing import List
 import smtplib
 from email.mime.multipart import MIMEMultipart
-from email.mime.base import MIMEBase
 from email.mime.text import MIMEText
 from email.utils import COMMASPACE
-from email import encoders
 
 
 # Auto detect the supported smtp servers from the email address
@@ -23,22 +19,35 @@ def smtp_detector(address: str):
         return smtp
 
 
+def combine_body(salutation: str, receiver: str | None, body: str, signature: str):
+    if salutation != "":
+        if receiver:
+            salutation = f"<p>{salutation} <strong>{receiver}</strong>,</p>"
+        else:
+            salutation = f"<p>{salutation},</p>"
+
+        body = f"{salutation}\n{body}"
+
+    if signature != "":
+        signature = f"<strong>,{signature}</strong>"
+        body = f"{body}\n{signature}"
+
+    return body
+
+
 def send_email(
     Password: str,
     From: str,
     To: str,
     Subject="",
-    Body="",
-    html_body="",
-    Attachements: List[str] = [],
+    salutation: str = "",
+    receiver_name: str | None = None,
+    html_body: str = "",
+    signature: str = "",
 ):
     try:
         # SMTP server
         smtp_server = smtp_detector(From)
-        if smtp_server.lower() == "exit":
-            print("send canceled")
-            return
-
         smtp_port = 587
 
         # connection to the SMTP server
@@ -52,49 +61,19 @@ def send_email(
         msg["To"] = COMMASPACE.join([To])
         msg["Subject"] = Subject
 
-        # plain text body
-        body = Body
-        msg.attach(MIMEText(body))
-
         # HTML text body
+        html_body = combine_body(
+            salutation=salutation,
+            receiver=receiver_name,
+            body=html_body,
+            signature=signature,
+        )
         if html_body != "":
             msg.attach(MIMEText(html_body, "html"))
 
-        # attachments of the email
-        if Attachements:
-            for file in Attachements:
-                try:
-                    fileAdd = file
-                    filename = os.path.basename(fileAdd)
-
-                    with open(fileAdd, "rb") as attachment:
-                        part = MIMEBase("application", "octet-stream")
-                        part.set_payload(attachment.read())
-                        encoders.encode_base64(part)
-                        part.add_header(
-                            "Content-Disposition", f"attachment; filename={filename}"
-                        )
-                        msg.attach(part)
-                except Exception as e:
-                    print("\n")
-                    print(e)
-                    while True:
-                        inp = input(
-                            "Do you want to continue sending the email ? [Y/n] "
-                        )
-                        if not inp.lower() in ["y", "n"]:
-                            print("bad input, try again")
-                        else:
-                            break
-
-                    if not inp in ["Y", "y"]:
-                        print("Send canceled")
-                        return
-
-            # send the email and close the connection
-            server.sendmail(From, To, msg.as_string())
-            server.quit()
-            print("The email sent succefully")
+        # send the email and close the connection
+        server.sendmail(From, To, msg.as_string())
+        server.quit()
 
     except Exception as e:
         if "Application-specific password required" in str(e):
@@ -107,55 +86,28 @@ def send_email(
             print(e)
 
 
-def main():
-    sender = "sender_address@example.com"
-    receiver = "receiver_address@example.com"
-    password = "senders_application_password"
-    subject = "Email sender test"
-    body = """
-        this is
-        a plain text
-        for body
-        of the
-        email.
-    """
+def send_for_each(
+    participants,
+    Password: str,
+    From: str,
+    Subject="",
+    salutation: str = "",
+    useReceiverName: bool = False,
+    html_body: str = "",
+    signature: str = "",
+):
+    for participant in participants:
+        receiver_name = None
+        if useReceiverName:
+            receiver_name = participant["firstName"]
 
-    html = """
-        <html>
-            <body>
-                <center>
-                    <h1>Hello world</h1>
-                    <br>
-                    <p>This is a test email with <b>HTML</b> content sent from Python.</p>
-                </center>
-            </body>
-        </html>
-    """
-    files = [
-        "example_file1.txt",
-        "path/to/example_file2.txt",
-    ]
-
-    try:
         send_email(
-            From=sender,
-            To=receiver,
-            Password=password,
-            Subject=subject,
-            Body=body,
-            html_body=html,
-            Attachements=files,
+            Password=Password,
+            From=From,
+            To=participant["email"],
+            Subject=Subject,
+            salutation=salutation,
+            receiver_name=receiver_name,
+            html_body=html_body,
+            signature=signature,
         )
-    except Exception as e:
-        if "Application-specific password required" in str(e):
-            print(
-                """Error in password: To send emails with the email provider Google "Gmail" you have to login with App-Password instead of the real password
-            > learn more at https://support.google.com/mail/?p=InvalidSecondFactor
-            """
-            )
-        else:
-            print(e)
-
-
-if __name__ == "__main__":
-    main()
