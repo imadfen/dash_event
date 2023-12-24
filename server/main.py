@@ -216,7 +216,7 @@ def receive_json():
     email_thread = threading.Thread(
         target=send_for_each,
         args=(
-            filter_participants(example_participants, eventId),
+            filter_participants(get_participants(), eventId),
             sender_password,
             sender_adress,
             subject,

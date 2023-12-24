@@ -22,7 +22,7 @@ export default function DashboardSection({selectedEvent, participants}: PropsTyp
     <div className="flex-grow min-h-full flex flex-col items-center bg-white">
       <Tabs selectedTab={activeTab} setActiveTab={setActiveTab} />
       <div className="w-full h-full px-10 py-4">
-        <div style={{ display: activeTab === "Event" ? "block" : "none" }}>
+        <div className="h-full" style={{ display: activeTab === "Event" ? "block" : "none" }}>
           <AdminEventTab event={selectedEvent} />
         </div>
         <div

@@ -5,5 +5,5 @@ export type Participant = {
     phone: string;
     isStudent: boolean;
     university?: string;
-    eventId: number;
+    eventId: string;
 }

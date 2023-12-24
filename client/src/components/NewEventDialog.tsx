@@ -1,6 +1,5 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Event } from "../types/Event";
-import { serverUrl } from "../utils/serverUrl";
 import handleAddEvent from "../utils/handleAddEvent";
 import { useState } from "react";
 
