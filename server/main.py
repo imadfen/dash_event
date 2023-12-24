@@ -5,7 +5,7 @@ import jwt
 import threading
 from dotenv import load_dotenv
 from emailSender import send_for_each
-from dataManagement import get_events, get_participants, validate_registration_data, add_participant
+from dataManagement import get_events, get_participants, validate_registration_data, add_participant, add_event, validate_event, delete_event
 import datetime
 
 
@@ -110,6 +110,45 @@ def register():
     
     try:
         add_participant(received_data)
+
+        return "", 200
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Unexpected error'}), 400
+
+
+############################### handle new event request ################################
+@app.route("/new_event", methods=["POST"])
+def new_event():
+    received_data = request.get_json()
+
+    print(received_data)
+
+    if not validate_event(received_data):
+        return jsonify({"error": "Invalid JSON format or data types."}), 400
+    
+    try:
+        add_event(received_data)
+
+        return "", 200
+    except Exception as e:
+        print(e)
+        return jsonify({'error': 'Unexpected error'}), 400
+
+
+
+############################### handle delete event request ################################
+@app.route("/delete_event", methods=["POST"])
+def delete_event_request():
+    received_data = request.get_json()
+
+    print(received_data)
+
+    if not isinstance(received_data, str):
+        return jsonify({"error": "Invalid JSON format or data types."}), 400
+    
+    try:
+        delete_event(received_data)
 
         return "", 200
     except Exception as e:

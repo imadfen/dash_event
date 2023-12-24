@@ -5,14 +5,15 @@ type PropsType = {
   events: Event[];
   selectedEvent: Event | null;
   selectEvent: (event: Event) => void;
+  openNewEvent: () => void;
 };
 
-export default function EventsSideList({ events, selectedEvent, selectEvent }: PropsType) {
+export default function EventsSideList({ events, selectedEvent, selectEvent, openNewEvent }: PropsType) {
   return (
     <div className="min-w-[256px] min-h-full bg-gray-100 drop-shadow-lg p-4 overflow-y-auto">
       <div className="flex mb-4 justify-between items-center">
         <h2 className="text-lg font-semibold">Events</h2>
-        <Icon icon="mingcute:plus-fill" width={20} className="cursor-pointer" />
+        <Icon icon="mingcute:plus-fill" width={20} className="cursor-pointer" onClick={openNewEvent} />
       </div>
       <div>
         {events.map((event) => (

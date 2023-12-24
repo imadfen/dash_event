@@ -6,7 +6,7 @@ export type EmailOptions = {
 }
 
 export type EmailMessage = {
-    eventId: number;
+    eventId: string;
     body: string;
     options: EmailOptions
 }
