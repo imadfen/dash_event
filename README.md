@@ -2,6 +2,19 @@
 
 Dash Events is a web application designed to streamline event registration processes while providing administrators with tools to manage events, view participant details, and send customized emails.
 
+## Content
+- [Features.](#features)
+- [Tech Stack.](#tech-stack)
+- [Getting Started.](#tech-stack)
+    + [Clone the Repository.](#1-clone-the-repository)
+    + [Install Dependencies.](#2-install-dependencies)
+    + [Setup Environment Variables.](#3-setup-environment-variables)
+    + [Run the Application.](#4-run-the-application)
+    + [Access the Application.](#5-access-the-application)
+- [Admin Credentials](#admin-credentials)
+- [Configuration](#configuration)
+- [Images](#images)
+
 ## Features
 
 - **Event Registration:** Users can browse a list of events and register for their preferred ones.
@@ -20,14 +33,14 @@ Dash Events is a web application designed to streamline event registration proce
 
 ## Getting Started
 
-1. **Clone the Repository:**
+### 1. **Clone the Repository:**
     ```bash
     git clone https://github.com/imad_fen/dash-event.git
     cd dash-event
     ```
 
-2. **Install Dependencies:**
-    - Navigate to the `client` directory for the frontend dependencies and the `server` directory for the backend dependencies.
+### 2. **Install Dependencies:**
+  - Navigate to the `client` directory for the frontend dependencies and the `server` directory for the backend dependencies.
     ```bash
     cd client
     npm install # or yarn install
@@ -39,14 +52,14 @@ Dash Events is a web application designed to streamline event registration proce
     cp .env.example .env # Create a .env file and add SECRET_KEY, SENDER_ADDRESS, and SENDER_PASSWORD
     ```
 
-3. **Setup Environment Variables:**
+### 3. **Setup Environment Variables:**
 
-    - In the `client` directory, create a `.env` file and add the following:
+  - In the `client` directory, create a `.env` file and add the following:
     ```
     VITE_SERVER_URL="http://127.0.0.1:5000"
     ```
 
-    - In the `server` directory, create a `.env` file and add the following:
+  - In the `server` directory, create a `.env` file and add the following:
     ```
     SECRET_KEY=<random 64 chars>
     SENDER_ADDRESS=<email sender address>
@@ -57,22 +70,22 @@ Dash Events is a web application designed to streamline event registration proce
 
       </a> Learn more about <b>Google App-Password</b> from here: https://support.google.com/accounts/answer/185833?hl=en
 
-5. **Run the Application:**
-    - Start the frontend server.
+### 4. **Run the Application:**
+  - Start the frontend server.
     ```bash
     # Frontend
     cd client
     npm run dev
     ```
-    - And the backend server.
+  - And the backend server.
     ```bash
     # Backend
     cd server
     python main.py
     ```
 
-6. **Access the Application:**
-    - Open your browser and visit `http://localhost:5173` for the user interface and `http://localhost:5173/admin` for the admin dashboard.
+### 5. **Access the Application:**
+  - Open your browser and visit `http://localhost:5173` for the user interface and `http://localhost:5173/admin` for the admin dashboard.
 
 ## Admin Credentials
 
@@ -84,3 +97,15 @@ To access the admin dashboard, use the following static credentials:
 
 - **Customizing Emails:**
   - Inside the admin dashboard, administrators can compose emails with configurable subject lines, salutations, and signatures. The option to include participant names in the salutation is available.
+ 
+
+ 
+## Images
+
+| <img src="./screenshots/img-1.png" alt="" width="100%" /> | <img src="./screenshots/img-2.png" alt="" width="100%" />  |
+|---|----|
+| <img src="./screenshots/img-3.png" alt="" width="100%" /> | <img src="./screenshots/img-4.png" alt="" width="100%" />  |
+| <img src="./screenshots/img-5.png" alt="" width="100%" /> | <img src="./screenshots/img-6.png" alt="" width="100%" />  |
+| <img src="./screenshots/img-7.png" alt="" width="100%" /> | <img src="./screenshots/img-8.png" alt="" width="100%" />  |
+| <img src="./screenshots/img-9.png" alt="" width="100%" /> | <img src="./screenshots/img-10.png" alt="" width="100%" />  |
+
