@@ -160,7 +160,7 @@ def delete_event_request():
 ############ check validity of data ############
 def validate_email_data(data):
     if all(key in data for key in ("eventId", "body", "options")):
-        if not isinstance(data["eventId"], int) or not isinstance(
+        if not isinstance(data["eventId"], str) or not isinstance(
             data["body"], str
         ):
             return False

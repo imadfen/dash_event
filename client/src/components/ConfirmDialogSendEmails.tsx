@@ -5,7 +5,7 @@ type PropsType = {
   reponseWith: (response: boolean) => void;
 };
 
-export default function ConfirmDialog({ isOpen, reponseWith }: PropsType) {
+export default function ConfirmDialogSendEmails({ isOpen, reponseWith }: PropsType) {
   if (!isOpen) {
     return null;
   }

@@ -5,8 +5,9 @@ import { useState } from "react";
 import handleSendEmail from "../utils/handleSendEmail";
 import EmailOptionsForm from "./EmailOptionsForm";
 import { Event } from "../types/Event";
-import ConfirmDialog from "./ConfirmDialog";
+import ConfirmDialogSendEmails from "./ConfirmDialogSendEmails";
 import SuccessDialog from "./SuccessDialog";
+import FailSendEmailDialog from "./FailSendEmailDialog";
 
 type PropsType = {
   selectedEvent: Event;
@@ -18,6 +19,7 @@ export default function AdminEmailTab({ selectedEvent }: PropsType) {
   const [loading, setLoading] = useState(false);
   const [confirmDialog, setConfirmDialog] = useState(false);
   const [successDialog, setSuccessDialog] = useState(false);
+  const [failDialog, setFailDialog] = useState(false);
 
   const resetFields = () => {
     setHtml("");
@@ -40,14 +42,19 @@ export default function AdminEmailTab({ selectedEvent }: PropsType) {
     setLoading(true);
     const options = getValues();
 
-    await handleSendEmail({
+    const result = await handleSendEmail({
       eventId: selectedEvent.id,
       body: html,
       options,
     });
 
-    resetFields();
-    setSuccessDialog(true);
+    if (result) {
+      resetFields();
+      setSuccessDialog(true);
+    } else {
+      setFailDialog(true);
+    }
+
     setLoading(false);
   };
 
@@ -61,13 +68,17 @@ export default function AdminEmailTab({ selectedEvent }: PropsType) {
           <EmailOptionsForm register={register} handleSubmit={handleSubmit} />
         </div>
       )}
-      <ConfirmDialog
+      <ConfirmDialogSendEmails
         isOpen={confirmDialog}
         reponseWith={handleConfirmationResonse}
       />
       <SuccessDialog
         isOpen={successDialog}
         close={() => setSuccessDialog(false)}
+      />
+      <FailSendEmailDialog
+        isOpen={failDialog}
+        onClose={() => setFailDialog(false)}
       />
     </div>
   );

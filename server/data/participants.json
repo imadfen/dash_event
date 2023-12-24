@@ -6,7 +6,7 @@
         "phone": "123-456-7890",
         "isStudent": true,
         "university": "ABC University",
-        "eventId": 1
+        "eventId": "1"
     },
     {
         "firstName": "Alice",
@@ -14,7 +14,7 @@
         "email": "alice@example.com",
         "phone": "987-654-3210",
         "isStudent": false,
-        "eventId": 2
+        "eventId": "2"
     },
     {
         "firstName": "Emma",
@@ -23,7 +23,7 @@
         "phone": "555-555-5555",
         "isStudent": true,
         "university": "XYZ College",
-        "eventId": 1
+        "eventId": "1"
     },
     {
         "firstName": "Michael",
@@ -31,7 +31,7 @@
         "email": "michael@example.com",
         "phone": "444-333-2222",
         "isStudent": false,
-        "eventId": 3
+        "eventId": "3"
     },
     {
         "firstName": "Sophia",
@@ -40,7 +40,7 @@
         "phone": "777-888-9999",
         "isStudent": true,
         "university": "LMN University",
-        "eventId": 2
+        "eventId": "2"
     },
     {
         "firstName": "Daniel",
@@ -49,7 +49,7 @@
         "phone": "111-222-3333",
         "isStudent": true,
         "university": "PQR College",
-        "eventId": 1
+        "eventId": "1"
     },
     {
         "firstName": "Olivia",
@@ -57,7 +57,7 @@
         "email": "olivia@example.com",
         "phone": "666-777-8888",
         "isStudent": false,
-        "eventId": 2
+        "eventId": "2"
     },
     {
         "firstName": "William",
@@ -66,7 +66,7 @@
         "phone": "222-333-4444",
         "isStudent": true,
         "university": "UVW Institute",
-        "eventId": 3
+        "eventId": "3"
     },
     {
         "firstName": "Ella",
@@ -75,7 +75,7 @@
         "phone": "999-888-7777",
         "isStudent": true,
         "university": "STU College",
-        "eventId": 1
+        "eventId": "1"
     },
     {
         "firstName": "James",
@@ -83,7 +83,7 @@
         "email": "james@example.com",
         "phone": "777-999-5555",
         "isStudent": false,
-        "eventId": 3
+        "eventId": "3"
     },
     {
         "firstName": "Liam",
@@ -92,7 +92,7 @@
         "phone": "333-444-5555",
         "isStudent": true,
         "university": "QRS University",
-        "eventId": 2
+        "eventId": "2"
     },
     {
         "firstName": "Ava",
@@ -100,7 +100,7 @@
         "email": "ava@example.com",
         "phone": "888-777-6666",
         "isStudent": false,
-        "eventId": 1
+        "eventId": "1"
     },
     {
         "firstName": "Noah",
@@ -109,7 +109,7 @@
         "phone": "111-222-3333",
         "isStudent": true,
         "university": "DEF College",
-        "eventId": 2
+        "eventId": "2"
     },
     {
         "firstName": "Isabella",
@@ -117,7 +117,7 @@
         "email": "isabella@example.com",
         "phone": "444-555-6666",
         "isStudent": false,
-        "eventId": 1
+        "eventId": "1"
     },
     {
         "firstName": "Mia",
@@ -126,7 +126,7 @@
         "phone": "777-888-9999",
         "isStudent": true,
         "university": "GHI University",
-        "eventId": 3
+        "eventId": "3"
     },
     {
         "firstName": "Logan",
@@ -135,7 +135,7 @@
         "phone": "222-333-4444",
         "isStudent": true,
         "university": "JKL College",
-        "eventId": 2
+        "eventId": "2"
     },
     {
         "firstName": "Sophia",
@@ -143,7 +143,7 @@
         "email": "sophiaali@example.com",
         "phone": "555-666-7777",
         "isStudent": false,
-        "eventId": 1
+        "eventId": "1"
     },
     {
         "firstName": "Elijah",
@@ -152,7 +152,7 @@
         "phone": "999-888-7777",
         "isStudent": true,
         "university": "MNO Institute",
-        "eventId": 3
+        "eventId": "3"
     },
     {
         "firstName": "Charlotte",
@@ -160,7 +160,7 @@
         "email": "charlotte@example.com",
         "phone": "111-222-3333",
         "isStudent": false,
-        "eventId": 2
+        "eventId": "2"
     },
     {
         "firstName": "Benjamin",
@@ -169,14 +169,6 @@
         "phone": "333-444-5555",
         "isStudent": true,
         "university": "PQR College",
-        "eventId": 1
-    },
-    {
-        "eventId": 1,
-        "firstName": "Mohamed Imad",
-        "lastName": "Fenniche",
-        "email": "imadfen20@gmail.com",
-        "phone": "0560018747",
-        "isStudent": false
+        "eventId": "1"
     }
 ]
